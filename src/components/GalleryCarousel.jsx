@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState, useEffect, useCallback } from 'react'
 import eventsData from '../data/events.json'
 import { SectionHeader } from './common'
 import { ICONS, SECTIONS } from '../constants'
@@ -10,13 +10,16 @@ import {
 } from '../utils/carouselUtils'
 import '../css/GalleryCarousel.css'
 
+const AUTO_SLIDE_INTERVAL_MS = 4000
+
 export default function GalleryCarousel() {
   const [currentIndex, setCurrentIndex] = useState(0)
+  const [isPaused, setIsPaused] = useState(false)
   const gallery = eventsData.gallery
 
-  const handleNextSlide = () => {
-    setCurrentIndex(getNextIndex(currentIndex, gallery.length))
-  }
+  const handleNextSlide = useCallback(() => {
+    setCurrentIndex((prev) => getNextIndex(prev, gallery.length))
+  }, [gallery.length])
 
   const handlePreviousSlide = () => {
     setCurrentIndex(getPreviousIndex(currentIndex, gallery.length))
@@ -25,6 +28,12 @@ export default function GalleryCarousel() {
   const handleGoToSlide = (slideIndex) => {
     setCurrentIndex(slideIndex)
   }
+
+  useEffect(() => {
+    if (isPaused) return
+    const timer = setInterval(handleNextSlide, AUTO_SLIDE_INTERVAL_MS)
+    return () => clearInterval(timer)
+  }, [isPaused, handleNextSlide])
 
   const currentItem = gallery[currentIndex]
 
@@ -37,7 +46,11 @@ export default function GalleryCarousel() {
           description="Moments and memories from our most vibrant community events."
         />
 
-        <div className="gallery-wrapper">
+        <div
+          className="gallery-wrapper"
+          onMouseEnter={() => setIsPaused(true)}
+          onMouseLeave={() => setIsPaused(false)}
+        >
           <div className="gallery-slider">
             {gallery.map((item, itemIndex) => (
               <div
@@ -117,3 +130,4 @@ export default function GalleryCarousel() {
     </section>
   )
 }
+

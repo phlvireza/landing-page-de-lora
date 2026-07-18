@@ -1,26 +1,42 @@
-import { useState, useRef } from 'react'
+import { useState, useRef, useEffect, useCallback } from 'react'
 import eventsData from '../data/events.json'
 import { SectionHeader, EventInfoItem, Button } from './common'
 import { ICONS } from '../constants'
 import { formatDateToShort } from '../utils/dateFormatter'
 import '../css/EventsSection.css'
 
+const AUTO_SLIDE_INTERVAL_MS = 5000
+const SCROLL_DISTANCE_PX = 350
+
 export default function EventsSection() {
   const [events] = useState(eventsData.events)
   const [hoveredEventId, setHoveredEventId] = useState(null)
+  const [isPaused, setIsPaused] = useState(false)
   const scrollContainerRef = useRef(null)
 
   const scrollLeft = () => {
     if (scrollContainerRef.current) {
-      scrollContainerRef.current.scrollBy({ left: -350, behavior: 'smooth' })
+      scrollContainerRef.current.scrollBy({ left: -SCROLL_DISTANCE_PX, behavior: 'smooth' })
     }
   }
 
-  const scrollRight = () => {
+  const scrollRight = useCallback(() => {
     if (scrollContainerRef.current) {
-      scrollContainerRef.current.scrollBy({ left: 350, behavior: 'smooth' })
+      const container = scrollContainerRef.current
+      const isAtEnd = container.scrollLeft + container.clientWidth >= container.scrollWidth - 10
+      if (isAtEnd) {
+        container.scrollTo({ left: 0, behavior: 'smooth' })
+      } else {
+        container.scrollBy({ left: SCROLL_DISTANCE_PX, behavior: 'smooth' })
+      }
     }
-  }
+  }, [])
+
+  useEffect(() => {
+    if (isPaused) return
+    const timer = setInterval(scrollRight, AUTO_SLIDE_INTERVAL_MS)
+    return () => clearInterval(timer)
+  }, [isPaused, scrollRight])
 
   return (
     <section id="events" className="events-section">
@@ -31,7 +47,11 @@ export default function EventsSection() {
           description="Join your neighbors for activities that build connection and create lasting memories."
         />
         
-        <div className="carousel-wrapper">
+        <div
+          className="carousel-wrapper"
+          onMouseEnter={() => setIsPaused(true)}
+          onMouseLeave={() => setIsPaused(false)}
+        >
           <button
             onClick={scrollLeft}
             className="carousel-nav-btn carousel-nav-left"
