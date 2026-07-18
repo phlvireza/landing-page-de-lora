@@ -1,0 +1,110 @@
+.footer-section {
+  background-color: var(--color-surface);
+  border-top: 1px solid var(--color-border);
+}
+.footer-container {
+  padding-top: 6rem;
+  padding-bottom: 6rem;
+}
+.footer-grid {
+  display: grid;
+  grid-template-columns: repeat(1, minmax(0, 1fr));
+  gap: 2rem;
+  margin-bottom: 2rem;
+}
+@media (min-width: 768px) {
+  .footer-grid {
+    gap: 3rem;
+    margin-bottom: 3rem;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+@media (min-width: 1024px) {
+  .footer-grid {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
+}
+
+.footer-brand-title {
+  font-size: 1.125rem;
+  font-weight: 600;
+  color: var(--color-text-main);
+  margin-bottom: 1rem;
+  letter-spacing: -0.02em;
+}
+.footer-brand-desc {
+  font-size: 0.875rem;
+  color: var(--color-text-muted);
+  line-height: 1.6;
+}
+
+.footer-contact-title {
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: var(--color-text-main);
+  margin-bottom: 1.25rem;
+  text-transform: uppercase;
+  letter-spacing: 0.15em;
+}
+.footer-contact-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  font-size: 0.875rem;
+  list-style: none;
+}
+.footer-contact-item {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+.footer-contact-item.align-start {
+  align-items: flex-start;
+}
+.footer-contact-icon {
+  color: var(--color-accent);
+}
+.footer-contact-icon.mt-0-5 {
+  margin-top: 0.125rem;
+}
+.footer-contact-link {
+  color: var(--color-text-muted);
+  font-weight: 500;
+  transition: color 0.2s;
+}
+.footer-contact-link:hover {
+  color: var(--color-accent);
+}
+.footer-contact-text {
+  color: var(--color-text-muted);
+}
+
+.footer-divider {
+  border-top: 1px solid var(--color-border);
+  padding-top: 2rem;
+}
+.footer-bottom {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 0.75rem;
+  color: var(--color-text-muted);
+  gap: 1rem;
+}
+@media (min-width: 640px) {
+  .footer-bottom {
+    flex-direction: row;
+  }
+}
+.footer-legal-links {
+  display: flex;
+  gap: 1.5rem;
+}
+.footer-legal-link {
+  font-weight: 500;
+  transition: color 0.2s;
+}
+.footer-legal-link:hover {
+  color: var(--color-accent);
+}

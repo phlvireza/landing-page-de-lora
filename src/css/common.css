@@ -1,0 +1,121 @@
+/* Button */
+.btn {
+  padding: 0.875rem 2rem;
+  font-weight: 500;
+  border-radius: 9999px;
+  transition: var(--transition-fast);
+  display: inline-block;
+  text-align: center;
+  border: 1px solid transparent;
+}
+.btn:active {
+  transform: scale(0.98);
+}
+.btn-primary {
+  background-color: var(--color-primary);
+  color: var(--color-white);
+}
+.btn-primary:hover {
+  background-color: var(--color-primary-hover);
+  box-shadow: var(--shadow-md);
+}
+.btn-accent {
+  background-color: var(--color-accent);
+  color: var(--color-white);
+}
+.btn-accent:hover {
+  background-color: var(--color-accent-hover);
+  box-shadow: var(--shadow-md);
+}
+.btn-secondary {
+  background-color: transparent;
+  color: var(--color-text-main);
+  border: 1px solid var(--color-border);
+}
+.btn-secondary:hover {
+  background-color: var(--color-gray-50);
+}
+
+/* EventInfoItem */
+.event-info-wrapper {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.75rem;
+}
+.event-info-icon {
+  color: var(--color-accent);
+  font-weight: 500;
+  min-width: max-content;
+}
+.event-info-value {
+  color: var(--color-text-main);
+  font-weight: 500;
+}
+
+/* FooterLinkSection */
+.footer-link-section-title {
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: var(--color-primary);
+  margin-bottom: 1.25rem;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+}
+.footer-link-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  font-size: 0.875rem;
+  list-style: none;
+}
+.footer-link-item {
+  color: var(--color-gray-600);
+  font-weight: 500;
+  transition: color 0.2s;
+}
+.footer-link-item:hover {
+  color: var(--color-accent);
+}
+
+/* NavigationLink */
+.nav-link {
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: var(--color-gray-700);
+  transition: color 0.2s;
+}
+.nav-link:hover {
+  color: var(--color-accent);
+}
+
+/* SectionHeader */
+.section-header-wrapper {
+  max-width: 42rem;
+  margin-bottom: 4rem;
+}
+.section-header-accent {
+  color: var(--color-accent);
+  font-size: 0.875rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  margin-bottom: 0.75rem;
+}
+.section-header-title {
+  font-size: 2.25rem;
+  font-weight: 600;
+  color: var(--color-text-main);
+  margin-bottom: 1rem;
+  line-height: 1.1;
+  letter-spacing: -0.03em;
+}
+@media (min-width: 640px) {
+  .section-header-title {
+    font-size: 3rem;
+  }
+}
+.section-header-description {
+  font-size: 1.125rem;
+  color: var(--color-text-muted);
+  line-height: 1.6;
+}

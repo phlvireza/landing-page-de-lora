@@ -1,0 +1,51 @@
+{
+  "events": [
+    {
+      "id": 1,
+      "title": "Community Garden Opening",
+      "date": "2026-08-15",
+      "time": "10:00 AM",
+      "location": "Central Green",
+      "description": "Join us for the grand opening of our community garden! Learn gardening tips and plant your own herbs.",
+      "image": "garden.jpg"
+    },
+    {
+      "id": 2,
+      "title": "Weekend Basketball Tournament",
+      "date": "2026-08-22",
+      "time": "3:00 PM",
+      "location": "Sports Court",
+      "description": "Fun basketball tournament for all skill levels. Bring your team or join one!",
+      "image": "basketball.jpg"
+    },
+    {
+      "id": 3,
+      "title": "Fitness & Wellness Yoga Class",
+      "date": "2026-08-25",
+      "time": "6:00 PM",
+      "location": "Community Hall",
+      "description": "Relaxing yoga session for stress relief and wellness. All levels welcome!",
+      "image": "yoga.jpg"
+    }
+  ],
+  "gallery": [
+    {
+      "id": 1,
+      "title": "Summer Picnic",
+      "image": "picnic.jpg",
+      "type": "image"
+    },
+    {
+      "id": 2,
+      "title": "Kids PlayGround",
+      "image": "playground.jpg",
+      "type": "image"
+    },
+    {
+      "id": 3,
+      "title": "Night Market Event",
+      "video": "market.mp4",
+      "type": "video"
+    }
+  ]
+}

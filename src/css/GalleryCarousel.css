@@ -1,0 +1,122 @@
+.gallery-section {
+  padding-top: 6rem;
+  padding-bottom: 6rem;
+  background-color: var(--color-surface);
+}
+@media (min-width: 640px) {
+  .gallery-section {
+    padding-top: 10rem;
+    padding-bottom: 10rem;
+  }
+}
+.gallery-wrapper {
+  position: relative;
+}
+.gallery-slider {
+  position: relative;
+  aspect-ratio: 4 / 3;
+  background-color: var(--color-canvas);
+  border-radius: var(--radius-2xl);
+  overflow: hidden;
+  box-shadow: var(--shadow-md);
+  border: 1px solid var(--color-border);
+}
+@media (min-width: 640px) {
+  .gallery-slider {
+    aspect-ratio: 16 / 9;
+  }
+}
+.gallery-item {
+  position: absolute;
+  inset: 0;
+  transition: var(--transition-slow);
+}
+.gallery-item-visible {
+  opacity: 1;
+  transform: scale(1);
+}
+.gallery-item-hidden {
+  opacity: 0;
+  transform: scale(0.95);
+}
+.gallery-image-bg {
+  width: 100%;
+  height: 100%;
+  background-color: #F7F6F3;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.gallery-video-bg {
+  width: 100%;
+  height: 100%;
+  background-color: #F9F9F8;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.gallery-content {
+  text-align: center;
+}
+.gallery-icon {
+  font-size: 6rem;
+  margin-bottom: 1rem;
+}
+.gallery-item-title {
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: var(--color-text-main);
+  letter-spacing: -0.02em;
+}
+.gallery-item-subtitle {
+  font-size: 0.875rem;
+  margin-top: 0.75rem;
+  color: var(--color-text-muted);
+  font-weight: 500;
+}
+.gallery-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to right, rgba(0,0,0,0), transparent, rgba(0,0,0,0));
+  pointer-events: none;
+}
+.gallery-dots {
+  display: flex;
+  justify-content: center;
+  gap: 0.625rem;
+  margin-top: 2rem;
+}
+.gallery-dot {
+  border-radius: 9999px;
+  transition: var(--transition-slow);
+}
+.gallery-dot-active {
+  background-color: var(--color-accent);
+  width: 2rem;
+  height: 0.5rem;
+}
+.gallery-dot-inactive {
+  background-color: var(--color-border);
+  width: 0.5rem;
+  height: 0.5rem;
+}
+.gallery-dot-inactive:hover {
+  background-color: var(--color-text-muted);
+}
+.gallery-caption {
+  margin-top: 2.5rem;
+  text-align: center;
+}
+.gallery-caption-title {
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: var(--color-primary);
+  margin-bottom: 0.5rem;
+}
+.gallery-caption-type {
+  font-size: 0.875rem;
+  text-transform: uppercase;
+  letter-spacing: 0.15em;
+  color: var(--color-text-muted);
+  font-weight: 500;
+}
