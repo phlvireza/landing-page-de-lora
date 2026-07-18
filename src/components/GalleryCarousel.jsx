@@ -1,7 +1,7 @@
 import { useState, useEffect, useCallback } from 'react'
 import eventsData from '../data/events.json'
 import { SectionHeader } from './common'
-import { ICONS, SECTIONS } from '../constants'
+import { ICONS, SECTIONS, AUTO_SLIDE_INTERVAL_MS } from '../constants'
 import {
   getNextIndex,
   getPreviousIndex,
@@ -9,8 +9,6 @@ import {
   isDotActive,
 } from '../utils/carouselUtils'
 import '../css/GalleryCarousel.css'
-
-const AUTO_SLIDE_INTERVAL_MS = 4000
 
 export default function GalleryCarousel() {
   const [currentIndex, setCurrentIndex] = useState(0)
@@ -55,11 +53,10 @@ export default function GalleryCarousel() {
             {gallery.map((item, itemIndex) => (
               <div
                 key={item.id}
-                className={`gallery-item ${
-                  isCarouselItemVisible(itemIndex, currentIndex)
+                className={`gallery-item ${isCarouselItemVisible(itemIndex, currentIndex)
                     ? 'gallery-item-visible'
                     : 'gallery-item-hidden'
-                }`}
+                  }`}
               >
                 {item.type === 'image' ? (
                   <div className="gallery-image-bg">
@@ -109,11 +106,10 @@ export default function GalleryCarousel() {
               <button
                 key={dotIndex}
                 onClick={() => handleGoToSlide(dotIndex)}
-                className={`gallery-dot ${
-                  isDotActive(dotIndex, currentIndex)
+                className={`gallery-dot ${isDotActive(dotIndex, currentIndex)
                     ? 'gallery-dot-active'
                     : 'gallery-dot-inactive'
-                }`}
+                  }`}
                 aria-label={`Go to slide ${dotIndex + 1}`}
               />
             ))}

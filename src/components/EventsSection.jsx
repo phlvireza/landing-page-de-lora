@@ -1,16 +1,12 @@
 import { useState, useRef, useEffect, useCallback } from 'react'
 import eventsData from '../data/events.json'
 import { SectionHeader, EventInfoItem, Button } from './common'
-import { ICONS } from '../constants'
+import { ICONS, AUTO_SLIDE_INTERVAL_MS, SCROLL_DISTANCE_PX } from '../constants'
 import { formatDateToShort } from '../utils/dateFormatter'
 import '../css/EventsSection.css'
 
-const AUTO_SLIDE_INTERVAL_MS = 3000
-const SCROLL_DISTANCE_PX = 350
-
 export default function EventsSection() {
   const [events] = useState(eventsData.events)
-  const [hoveredEventId, setHoveredEventId] = useState(null)
   const [isPaused, setIsPaused] = useState(false)
   const scrollContainerRef = useRef(null)
 
@@ -79,8 +75,6 @@ export default function EventsSection() {
             {events.map((event, eventIndex) => (
               <div
                 key={event.id}
-                onMouseEnter={() => setHoveredEventId(event.id)}
-                onMouseLeave={() => setHoveredEventId(null)}
                 className="event-card"
                 style={{
                   animation: `slideUp 0.5s ease-out ${eventIndex * 0.1}s both`,
