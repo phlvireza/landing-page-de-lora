@@ -5,7 +5,7 @@ import { ICONS } from '../constants'
 import { formatDateToShort } from '../utils/dateFormatter'
 import '../css/EventsSection.css'
 
-const AUTO_SLIDE_INTERVAL_MS = 5000
+const AUTO_SLIDE_INTERVAL_MS = 3000
 const SCROLL_DISTANCE_PX = 350
 
 export default function EventsSection() {
