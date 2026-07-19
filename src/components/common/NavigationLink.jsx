@@ -11,9 +11,10 @@ export default function NavigationLink({
   href,
   label,
   className = '',
+  isActive = false,
 }) {
   return (
-    <a href={href} className={`nav-link ${className}`}>
+    <a href={href} className={`nav-link ${isActive ? 'active' : ''} ${className}`}>
       {label}
     </a>
   )

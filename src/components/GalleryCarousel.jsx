@@ -1,4 +1,4 @@
-import { useState, useEffect, useCallback } from 'react'
+import { useState, useEffect, useCallback, useRef } from 'react'
 import eventsData from '../data/events.json'
 import { SectionHeader } from './common'
 import { ICONS, SECTIONS, AUTO_SLIDE_INTERVAL_MS } from '../constants'
@@ -13,18 +13,44 @@ import '../css/GalleryCarousel.css'
 export default function GalleryCarousel() {
   const [currentIndex, setCurrentIndex] = useState(0)
   const [isPaused, setIsPaused] = useState(false)
+  const touchStartX = useRef(null)
+  const touchEndX = useRef(null)
+
   const gallery = eventsData.gallery
 
   const handleNextSlide = useCallback(() => {
     setCurrentIndex((prev) => getNextIndex(prev, gallery.length))
   }, [gallery.length])
 
-  const handlePreviousSlide = () => {
-    setCurrentIndex(getPreviousIndex(currentIndex, gallery.length))
+  const handlePreviousSlide = useCallback(() => {
+    setCurrentIndex((prev) => getPreviousIndex(prev, gallery.length))
+  }, [gallery.length])
+
+  const onTouchStart = (e) => {
+    touchEndX.current = null
+    touchStartX.current = e.targetTouches[0].clientX
   }
 
-  const handleGoToSlide = (slideIndex) => {
-    setCurrentIndex(slideIndex)
+  const onTouchMove = (e) => {
+    touchEndX.current = e.targetTouches[0].clientX
+  }
+
+  const onTouchEnd = () => {
+    if (touchStartX.current === null || touchEndX.current === null) return
+    const distance = touchStartX.current - touchEndX.current
+    const isLeftSwipe = distance > 50
+    const isRightSwipe = distance < -50
+    
+    if (isLeftSwipe) {
+      handleNextSlide()
+    }
+    if (isRightSwipe) {
+      handlePreviousSlide()
+    }
+    
+    // Reset values
+    touchStartX.current = null
+    touchEndX.current = null
   }
 
   useEffect(() => {
@@ -48,6 +74,9 @@ export default function GalleryCarousel() {
           className="gallery-wrapper"
           onMouseEnter={() => setIsPaused(true)}
           onMouseLeave={() => setIsPaused(false)}
+          onTouchStart={onTouchStart}
+          onTouchMove={onTouchMove}
+          onTouchEnd={onTouchEnd}
         >
           <div className="gallery-slider">
             {gallery.map((item, itemIndex) => (
@@ -83,7 +112,7 @@ export default function GalleryCarousel() {
 
           <button
             onClick={handlePreviousSlide}
-            className="carousel-nav-btn carousel-nav-left"
+            className="gallery-nav-btn gallery-nav-left"
             aria-label="Previous slide"
           >
             <svg width="20" height="20" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -93,7 +122,7 @@ export default function GalleryCarousel() {
 
           <button
             onClick={handleNextSlide}
-            className="carousel-nav-btn carousel-nav-right"
+            className="gallery-nav-btn gallery-nav-right"
             aria-label="Next slide"
           >
             <svg width="20" height="20" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -103,14 +132,13 @@ export default function GalleryCarousel() {
 
           <div className="gallery-dots">
             {gallery.map((_, dotIndex) => (
-              <button
+              <div
                 key={dotIndex}
-                onClick={() => handleGoToSlide(dotIndex)}
                 className={`gallery-dot ${isDotActive(dotIndex, currentIndex)
                     ? 'gallery-dot-active'
                     : 'gallery-dot-inactive'
                   }`}
-                aria-label={`Go to slide ${dotIndex + 1}`}
+                aria-label={`Slide ${dotIndex + 1} indicator`}
               />
             ))}
           </div>

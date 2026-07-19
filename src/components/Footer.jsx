@@ -9,7 +9,7 @@ export default function Footer() {
         <div className="footer-grid">
           {/* Brand */}
           <div>
-            <h3 className="footer-brand-title">De Lora</h3>
+            <h3 className="footer-brand-title">de'Lora</h3>
             <p className="footer-brand-desc">
               Building stronger neighborhoods through meaningful community connection and shared experiences.
             </p>
@@ -54,7 +54,7 @@ export default function Footer() {
         {/* Divider */}
         <div className="footer-divider">
           <div className="footer-bottom">
-            <p>&copy; 2026 De Lora Community. All rights reserved.</p>
+            <p>&copy; 2026 de'Lora Community. All rights reserved.</p>
             <div className="footer-legal-links">
               <a href="#" className="footer-legal-link">
                 Privacy Policy

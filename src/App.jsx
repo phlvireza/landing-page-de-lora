@@ -1,8 +1,11 @@
 import Header from './components/Header'
 import Hero from './components/Hero'
+import AboutSection from './components/AboutSection'
 import EventsSection from './components/EventsSection'
 import GalleryCarousel from './components/GalleryCarousel'
+import FaqSection from './components/FaqSection'
 import Footer from './components/Footer'
+import { ScrollReveal, BackToTop } from './components/common'
 
 /**
  * Main App Component
@@ -15,10 +18,23 @@ function App() {
   return (
     <div className="app-container">
       <Header />
-      <Hero />
-      <EventsSection />
-      <GalleryCarousel />
+      <ScrollReveal>
+        <Hero />
+      </ScrollReveal>
+      <ScrollReveal>
+        <AboutSection />
+      </ScrollReveal>
+      <ScrollReveal>
+        <EventsSection />
+      </ScrollReveal>
+      <ScrollReveal>
+        <GalleryCarousel />
+      </ScrollReveal>
+      <ScrollReveal>
+        <FaqSection />
+      </ScrollReveal>
       <Footer />
+      <BackToTop />
     </div>
   )
 }

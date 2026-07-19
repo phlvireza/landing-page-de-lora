@@ -108,3 +108,7 @@
 .footer-legal-link:hover {
   color: var(--color-accent);
 }
+.footer-contact-link:focus,
+.footer-legal-link:focus {
+  outline: none !important;
+}

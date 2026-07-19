@@ -19,6 +19,7 @@ export default function FooterLinkSection({ title, links }) {
             <a
               href={link.href}
               className="footer-link-item"
+              onClick={(e) => e.currentTarget.blur()}
             >
               {link.label}
             </a>

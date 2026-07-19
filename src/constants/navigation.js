@@ -4,8 +4,10 @@
  */
 
 export const NAVIGATION_LINKS = [
+  { id: 'about', label: 'About', href: '#about' },
   { id: 'events', label: 'Events', href: '#events' },
   { id: 'gallery', label: 'Gallery', href: '#gallery' },
+  { id: 'faqs', label: 'FAQs', href: '#faqs' },
   { id: 'contact', label: 'Contact', href: '#contact' },
 ]
 
@@ -16,14 +18,14 @@ export const FOOTER_LINKS = {
     { id: 'guidelines', label: 'Community Guidelines', href: '#' },
   ],
   resources: [
-    { id: 'about', label: 'About Us', href: '#' },
-    { id: 'faqs', label: 'FAQs', href: '#' },
-    { id: 'involved', label: 'Get Involved', href: '#' },
+    { id: 'about', label: 'About Us', href: '#about' },
+    { id: 'faqs', label: 'FAQs', href: '#faqs' },
+    { id: 'contact', label: 'Contact', href: '#contact' },
   ],
 }
 
 export const CONTACT_INFO = {
   email: 'info@delora.com',
   phone: '+1 (234) 567-890',
-  location: 'De Lora Housing Area',
+  location: "de'Lora Housing Area",
 }

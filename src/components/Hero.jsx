@@ -17,7 +17,7 @@ export default function Hero() {
   return (
     <section className="hero-section">
       <div className="hero-backdrop" />
-      
+
       <div className="container hero-content">
         <div className="hero-grid">
           <div className="hero-text-block">
@@ -26,7 +26,7 @@ export default function Hero() {
                 {SECTIONS.WELCOME}
               </p>
               <h1 className="hero-title">
-                De Lora Community
+                de'Lora Community
               </h1>
             </div>
             <p className="hero-description">
@@ -41,7 +41,7 @@ export default function Hero() {
               </Button>
             </div>
           </div>
-          
+
           <div className="hero-image-block">
             <div className="hero-image-wrapper">
               <span className="hero-icon">{ICONS.HOME}</span>
