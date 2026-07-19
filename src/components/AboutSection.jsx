@@ -17,10 +17,10 @@ export default function AboutSection() {
             <SectionHeader
               accentLabel="About Us"
               title="Experience Modern Community Living"
-              description="de'Lora is more than just a housing area; it's a vibrant, master-planned community designed for families to thrive. We blend modern architecture with lush natural surroundings to create the perfect sanctuary."
+              description="de’Lora is more than just a housing area; it's a vibrant, master-planned community designed for families to thrive. We blend modern architecture with lush natural surroundings to create the perfect sanctuary."
             />
           </div>
-          
+
           <div className="amenities-grid">
             {AMENITIES.map((amenity) => (
               <div key={amenity.id} className="amenity-card">

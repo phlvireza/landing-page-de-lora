@@ -22,19 +22,19 @@ export default function FaqSection() {
         <SectionHeader
           accentLabel="Common Questions"
           title="Frequently Asked Questions"
-          description="Find quick answers to the most common questions about living in de'Lora."
+          description="Find quick answers to the most common questions about living in de’Lora."
         />
-        
+
         <div className="faq-list">
           {FAQS.map((faq) => {
             const isOpen = openId === faq.id
             return (
-              <div 
-                key={faq.id} 
+              <div
+                key={faq.id}
                 className={`faq-item ${isOpen ? 'open' : ''}`}
               >
-                <button 
-                  className="faq-question" 
+                <button
+                  className="faq-question"
                   onClick={() => toggleFaq(faq.id)}
                   aria-expanded={isOpen}
                 >

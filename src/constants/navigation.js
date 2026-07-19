@@ -27,5 +27,5 @@ export const FOOTER_LINKS = {
 export const CONTACT_INFO = {
   email: 'info@delora.com',
   phone: '+1 (234) 567-890',
-  location: "de'Lora Housing Area",
+  location: "de’Lora Housing Area",
 }

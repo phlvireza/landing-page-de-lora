@@ -26,7 +26,7 @@ export default function Hero() {
                 {SECTIONS.WELCOME}
               </p>
               <h1 className="hero-title">
-                de'Lora Community
+                de’Lora Community
               </h1>
             </div>
             <p className="hero-description">

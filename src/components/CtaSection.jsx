@@ -10,7 +10,7 @@ export default function CtaSection() {
             <span className="cta-accent">Ready to move in?</span>
             <h2 className="cta-title">Become Part of Our Growing Community</h2>
             <p className="cta-description">
-              Schedule a visit today to explore our model homes, walk through the parks, and experience the de'Lora lifestyle firsthand.
+              Schedule a visit today to explore our model homes, walk through the parks, and experience the de’Lora lifestyle firsthand.
             </p>
             <div className="cta-actions">
               <Button variant="accent">Schedule a Visit</Button>
