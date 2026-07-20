@@ -3,25 +3,50 @@ import eventsData from '../data/events.json'
 import { SectionHeader, EventInfoItem, Button } from './common'
 import { ICONS, AUTO_SLIDE_INTERVAL_MS, SCROLL_DISTANCE_PX } from '../constants'
 import { formatDateToShort } from '../utils/dateFormatter'
+import CalendarModal from './CalendarModal'
 import '../css/EventsSection.css'
 
 export default function EventsSection() {
   const [events] = useState(eventsData.events)
+  // Duplicate events to create an infinite scroll illusion
+  const extendedEvents = [...events, ...events, ...events]
+  
   const [isPaused, setIsPaused] = useState(false)
+  const [isCalendarOpen, setIsCalendarOpen] = useState(false)
   const scrollContainerRef = useRef(null)
 
   const scrollLeft = () => {
     if (scrollContainerRef.current) {
-      scrollContainerRef.current.scrollBy({ left: -SCROLL_DISTANCE_PX, behavior: 'smooth' })
+      const container = scrollContainerRef.current
+      if (container.scrollLeft <= 0) {
+         // Silently jump to the middle set
+         const oneSetWidth = container.scrollWidth / 3
+         container.scrollTo({ left: oneSetWidth, behavior: 'auto' })
+         setTimeout(() => {
+           container.scrollBy({ left: -SCROLL_DISTANCE_PX, behavior: 'smooth' })
+         }, 10)
+      } else {
+        container.scrollBy({ left: -SCROLL_DISTANCE_PX, behavior: 'smooth' })
+      }
     }
   }
 
   const scrollRight = useCallback(() => {
     if (scrollContainerRef.current) {
       const container = scrollContainerRef.current
-      const isAtEnd = container.scrollLeft + container.clientWidth >= container.scrollWidth - 10
+      // If we scroll into the third set, we seamlessly jump back to the second set
+      const twoSetsWidth = (container.scrollWidth / 3) * 2
+      const isAtEnd = container.scrollLeft + container.clientWidth >= twoSetsWidth - 10
+      
       if (isAtEnd) {
-        container.scrollTo({ left: 0, behavior: 'smooth' })
+        // Silently jump to the identical position in the middle set
+        const oneSetWidth = container.scrollWidth / 3
+        container.scrollTo({ left: container.scrollLeft - oneSetWidth, behavior: 'auto' })
+        
+        // Wait a tiny bit for the jump to take effect, then smooth scroll
+        setTimeout(() => {
+          container.scrollBy({ left: SCROLL_DISTANCE_PX, behavior: 'smooth' })
+        }, 10)
       } else {
         container.scrollBy({ left: SCROLL_DISTANCE_PX, behavior: 'smooth' })
       }
@@ -29,24 +54,47 @@ export default function EventsSection() {
   }, [])
 
   useEffect(() => {
-    if (isPaused) return
+    if (isPaused || isCalendarOpen) return
     const timer = setInterval(scrollRight, AUTO_SLIDE_INTERVAL_MS)
     return () => clearInterval(timer)
-  }, [isPaused, scrollRight])
+  }, [isPaused, isCalendarOpen, scrollRight])
+
+  // Center the scroll initially on the middle set
+  useEffect(() => {
+    if (scrollContainerRef.current) {
+      const container = scrollContainerRef.current
+      const oneSetWidth = container.scrollWidth / 3
+      container.scrollTo({ left: oneSetWidth, behavior: 'auto' })
+    }
+  }, [])
 
   return (
     <section id="events" className="events-section">
       <div className="container events-container">
-        <SectionHeader
-          accentLabel="Community Calendar"
-          title="Upcoming Events"
-          description="Join your neighbors for activities that build connection and create lasting memories."
-        />
+        <div className="events-header-wrapper">
+          <SectionHeader
+            accentLabel="Community Calendar"
+            title="Upcoming Events"
+            description="Join your neighbors for activities that build connection and create lasting memories."
+          />
+          <div className="view-calendar-wrapper">
+            <Button 
+              variant="accent" 
+              icon={ICONS.DATE} 
+              onClick={() => setIsCalendarOpen(true)}
+            >
+              View Detail Event
+            </Button>
+          </div>
+        </div>
         
         <div
           className="carousel-wrapper"
           onMouseEnter={() => setIsPaused(true)}
           onMouseLeave={() => setIsPaused(false)}
+          onTouchStart={() => setIsPaused(true)}
+          onTouchEnd={() => setIsPaused(false)}
+          onClick={() => setIsPaused(true)}
         >
           <button
             onClick={scrollLeft}
@@ -72,13 +120,10 @@ export default function EventsSection() {
             ref={scrollContainerRef}
             className="events-scroll-container"
           >
-            {events.map((event, eventIndex) => (
+            {extendedEvents.map((event, eventIndex) => (
               <div
-                key={event.id}
+                key={`${event.id}-${eventIndex}`}
                 className="event-card"
-                style={{
-                  animation: `slideUp 0.5s ease-out ${eventIndex * 0.1}s both`,
-                }}
               >
                 <div className="event-image-wrapper">
                   <div className="event-image-overlay" />
@@ -116,6 +161,12 @@ export default function EventsSection() {
           </div>
         </div>
       </div>
+      
+      <CalendarModal 
+        isOpen={isCalendarOpen} 
+        onClose={() => setIsCalendarOpen(false)} 
+        events={events}
+      />
     </section>
   )
 }

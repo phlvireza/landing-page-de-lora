@@ -12,6 +12,23 @@
 .events-container {
   position: relative;
 }
+.events-header-wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 1.5rem;
+  margin-bottom: 2rem;
+}
+@media (min-width: 768px) {
+  .events-header-wrapper {
+    flex-direction: row;
+    align-items: flex-end;
+  }
+}
+.view-calendar-wrapper {
+  flex-shrink: 0;
+}
 .carousel-wrapper {
   position: relative;
 }
@@ -93,7 +110,7 @@
   }
 }
 .event-card:hover {
-  border-color: var(--color-primary);
+  border-color: var(--color-accent);
   box-shadow: var(--shadow-hover);
   transform: translateY(-4px);
 }

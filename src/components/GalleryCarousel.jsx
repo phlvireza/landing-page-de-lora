@@ -27,6 +27,7 @@ export default function GalleryCarousel() {
   }, [gallery.length])
 
   const onTouchStart = (e) => {
+    setIsPaused(true)
     touchEndX.current = null
     touchStartX.current = e.targetTouches[0].clientX
   }
@@ -36,6 +37,7 @@ export default function GalleryCarousel() {
   }
 
   const onTouchEnd = () => {
+    setIsPaused(false)
     if (touchStartX.current === null || touchEndX.current === null) return
     const distance = touchStartX.current - touchEndX.current
     const isLeftSwipe = distance > 50
