@@ -7,6 +7,7 @@ export const NAVIGATION_LINKS = [
   { id: 'about', label: 'About', href: '#about' },
   { id: 'events', label: 'Events', href: '#events' },
   { id: 'gallery', label: 'Gallery', href: '#gallery' },
+  { id: 'report', label: 'Community Report', href: '#report' },
   { id: 'faqs', label: 'FAQs', href: '#faqs' },
   { id: 'contact', label: 'Contact', href: '#contact' },
 ]
@@ -15,6 +16,7 @@ export const FOOTER_LINKS = {
   explore: [
     { id: 'events', label: 'Upcoming Events', href: '#events' },
     { id: 'gallery', label: 'Gallery', href: '#gallery' },
+    { id: 'report', label: 'Community Report', href: '#report' },
     { id: 'guidelines', label: 'Community Guidelines', href: '#' },
   ],
   resources: [

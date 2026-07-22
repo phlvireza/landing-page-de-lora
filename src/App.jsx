@@ -3,6 +3,7 @@ import Hero from './components/Hero'
 import AboutSection from './components/AboutSection'
 import EventsSection from './components/EventsSection'
 import GalleryCarousel from './components/GalleryCarousel'
+import CommunityReportSection from './components/CommunityReportSection'
 import FaqSection from './components/FaqSection'
 import Footer from './components/Footer'
 import { ScrollReveal, BackToTop } from './components/common'
@@ -29,6 +30,9 @@ function App() {
       </ScrollReveal>
       <ScrollReveal>
         <GalleryCarousel />
+      </ScrollReveal>
+      <ScrollReveal>
+        <CommunityReportSection />
       </ScrollReveal>
       <ScrollReveal>
         <FaqSection />

@@ -15,41 +15,33 @@ export default function EventsSection() {
   const [isCalendarOpen, setIsCalendarOpen] = useState(false)
   const scrollContainerRef = useRef(null)
 
+  // Seamless infinite loop handler for both manual scrolling and button navigation
+  const handleScroll = useCallback(() => {
+    if (!scrollContainerRef.current) return
+    const container = scrollContainerRef.current
+    const oneSetWidth = container.scrollWidth / 3
+
+    if (!oneSetWidth) return
+
+    // If user (manually or via button) scrolls into Set 3, jump back to Set 2
+    if (container.scrollLeft >= oneSetWidth * 2 - 10) {
+      container.scrollLeft -= oneSetWidth
+    }
+    // If user scrolls left into Set 1, jump forward to Set 2
+    else if (container.scrollLeft <= 10) {
+      container.scrollLeft += oneSetWidth
+    }
+  }, [])
+
   const scrollLeft = () => {
     if (scrollContainerRef.current) {
-      const container = scrollContainerRef.current
-      if (container.scrollLeft <= 0) {
-         // Silently jump to the middle set
-         const oneSetWidth = container.scrollWidth / 3
-         container.scrollTo({ left: oneSetWidth, behavior: 'auto' })
-         setTimeout(() => {
-           container.scrollBy({ left: -SCROLL_DISTANCE_PX, behavior: 'smooth' })
-         }, 10)
-      } else {
-        container.scrollBy({ left: -SCROLL_DISTANCE_PX, behavior: 'smooth' })
-      }
+      scrollContainerRef.current.scrollBy({ left: -SCROLL_DISTANCE_PX, behavior: 'smooth' })
     }
   }
 
   const scrollRight = useCallback(() => {
     if (scrollContainerRef.current) {
-      const container = scrollContainerRef.current
-      // If we scroll into the third set, we seamlessly jump back to the second set
-      const twoSetsWidth = (container.scrollWidth / 3) * 2
-      const isAtEnd = container.scrollLeft + container.clientWidth >= twoSetsWidth - 10
-      
-      if (isAtEnd) {
-        // Silently jump to the identical position in the middle set
-        const oneSetWidth = container.scrollWidth / 3
-        container.scrollTo({ left: container.scrollLeft - oneSetWidth, behavior: 'auto' })
-        
-        // Wait a tiny bit for the jump to take effect, then smooth scroll
-        setTimeout(() => {
-          container.scrollBy({ left: SCROLL_DISTANCE_PX, behavior: 'smooth' })
-        }, 10)
-      } else {
-        container.scrollBy({ left: SCROLL_DISTANCE_PX, behavior: 'smooth' })
-      }
+      scrollContainerRef.current.scrollBy({ left: SCROLL_DISTANCE_PX, behavior: 'smooth' })
     }
   }, [])
 
@@ -118,6 +110,7 @@ export default function EventsSection() {
 
           <div
             ref={scrollContainerRef}
+            onScroll={handleScroll}
             className="events-scroll-container"
           >
             {extendedEvents.map((event, eventIndex) => (
