@@ -51,7 +51,7 @@ export default function Header() {
         <nav className="container header-nav">
           <div className="header-container">
             <div className="header-logo">
-              <img src="/images/logo.png" alt="de’Lora Logo" className="header-logo-image" />
+              <img src={`${import.meta.env.BASE_URL}images/logo.png`} alt="de’Lora Logo" className="header-logo-image" />
               <h1 className="header-title">de’Lora</h1>
               <span className="header-subtitle">Community</span>
             </div>
